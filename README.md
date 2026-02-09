@@ -9,7 +9,7 @@ L’objectif est d’implémenter une interface permettant de :
 - saisir un **terme de recherche**,
 - fournir une **liste de mots** (alphanumériques, en minuscules),
 - définir un **nombre entier N**,
-![Description de l’image](assets/demo.png)
+![Description de l’image](assets/demo.PNG)
 
 afin de retourner une liste de **N suggestions** les plus proches du terme recherché.
 
