@@ -1,23 +1,73 @@
 # Serensia
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.
+Ce projet a été généré avec [Angular CLI](https://github.com/angular/angular-cli) version **11.0.2**.
 
-## Description du code 
-Implémenter l'interface avec un algorithme qui prend un terme et retourne parmi une liste de termes en minuscule, alphanumérique, ceux qui contiennent le terme ou un terme le plus approchant de celui entré. 
-On retourne N suggestions (s'il y a égalité dans le nombre de différences, prendre les termes les plus proche en longueur du terme recherché, puis triés par ordre alphabétique). 
-La similarité est déterminée par le nombre de lettre à remplacer (on ne cherchera pas en insérant des lettres) pour retrouver le terme, moins il y a de changements a faire, plus le mot est "contenu". 
-Exemple : si on cherche 2 termes approchant de 'gros' dans la liste [gros, gras, graisse, agressif, go, ros, gro] on aura: 
+## Description du sujet
 
-gros= 0 différence 
+L’objectif est d’implémenter une interface permettant de :
 
-gras= 1 différence 
+- saisir un **terme de recherche**,
+- fournir une **liste de mots** (alphanumériques, en minuscules),
+- définir un **nombre entier N**,
+![Description de l’image](assets/demo.png)
 
-graisse= 2 différences 
+afin de retourner une liste de **N suggestions** les plus proches du terme recherché.
 
-agressif= 1 différence  
+### Règles de similarité
 
-go = pas du tout similaire (pas assez de lettres) 
+La similarité entre deux mots est déterminée par le **nombre de lettres à remplacer** pour transformer un mot en le terme recherché :
 
-ros = pas du tout similaire (pas assez de lettres) 
+- Aucune insertion ni suppression de lettres n’est autorisée.
+- Moins il y a de remplacements à effectuer, plus le mot est considéré comme similaire.
 
-gro = pas du tout similaire (pas assez de lettres) 
+### Règles de tri
+
+- Les mots sont d’abord triés par **nombre croissant de différences**.
+- En cas d’égalité :
+  1. Les mots dont la **longueur est la plus proche** de celle du terme recherché sont prioritaires.
+  2. En dernier recours, un **tri alphabétique** est appliqué.
+
+### Exemple
+
+Pour une recherche de **2 suggestions** à partir du terme **`gros`** dans la liste suivante :
+
+```
+[gros, gras, graisse, agressif, go, ros, gro]
+```
+
+Résultat attendu :
+
+- `gros` → 0 différence  
+- `gras` → 1 différence  
+
+Détails d’évaluation :
+
+- `graisse` → 2 différences  
+- `agressif` → 1 différence mais longueur moins proche  
+- `go`, `ros`, `gro` → non similaires (longueur insuffisante)
+
+## Description du code
+
+### Interface
+
+Le front-end permet de saisir :
+
+- le terme recherché,
+- la liste des mots (séparés par des virgules),
+- le nombre de suggestions souhaitées,
+
+ainsi qu’un bouton pour lancer le traitement.
+
+### Variables principales
+
+- `term: string` — terme de recherche  
+- `rawChoices: string` — liste brute des mots  
+- `numberOfSuggestions: number` — nombre de suggestions à retourner  
+
+### Fonctions principales
+
+- **`getDifferenceScore`**  
+  Calcule le score de différence entre deux mots.
+
+- **`getSuggestions`**  
+  Ordonne les mots en fonction de leur score de similarité, en s’appuyant sur `getDifferenceScore`, puis applique les règles de tri définies.
