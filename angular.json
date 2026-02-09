@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "serensia"
+  "defaultProject": "serensia",
+  "cli": {
+    "analytics": false
+  }
 }

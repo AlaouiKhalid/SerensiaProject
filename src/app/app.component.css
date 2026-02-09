@@ -1,0 +1,33 @@
+.container {
+  max-width: 500px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+}
+
+label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+button {
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 6px;
+  border-bottom: 1px solid #eee;
+}
